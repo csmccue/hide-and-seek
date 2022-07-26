@@ -91,6 +91,17 @@ footer {
     box-shadow: var(--shadow);
 }
 
+.hiding-place {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+}
+.face::after {
+    content: '😃';
+}
+
 @keyframes pulse {
     20% {
         transform: rotate3d(-10, -10, -10, 50deg) scale(1.2);
