@@ -32,7 +32,7 @@ shedButton.addEventListener('click', () => {
         handleGuess(answer, 'shed');
     } else {
         if (answer === 'shed'){
-            let answer = 'boulder';
+            answer = 'boulder';
         } else {
             handleGuess(answer, 'shed'); 
         }
@@ -46,7 +46,7 @@ treeButton.addEventListener('click', () => {
         handleGuess(answer, 'tree');
     } else {
         if (answer === 'tree'){
-            let answer = 'shed';
+            answer = 'shed';
         } else {
             handleGuess(answer, 'tree'); 
         }
@@ -60,7 +60,7 @@ boulderButton.addEventListener('click', () => {
         handleGuess(answer, 'boulder');
     } else {
         if (answer === 'boulder'){
-            let answer = 'tree';
+            answer = 'tree';
         } else {
             handleGuess(answer, 'boulder'); 
         }
@@ -82,20 +82,24 @@ restartButton.addEventListener('click', () => {
     //restart styles
     shedContainer.classList.remove('face');
     treeContainer.classList.remove('face');
-    boulderContainer.classList.remove('face');
-    //restart styles
-    shedContainer.classList.remove('face');
-    treeContainer.classList.remove('face');
     boulderContainer.classList.remove('face');    
 });
 
 impossibleButton.addEventListener('click', () => {
     console.log('IMPOSSIBLE');    
     impossibleMode = 1;
+    impossibleButton.style['background-color'] = 'red';
+    treeButton.style['background-color'] = 'red';
+    boulderButton.style['background-color'] = 'red';
+    shedButton.style['background-color'] = 'red';
 });
 normalButton.addEventListener('click', () => {
     console.log('KEEP VANCOUVER NORMAL');    
     impossibleMode = 0;
+    impossibleButton.style['background-color'] = null;
+    treeButton.style['background-color'] = null;
+    boulderButton.style['background-color'] = null;
+    shedButton.style['background-color'] = null;
 });
 
 function handleGuess(correctSpot, userGuess) {
@@ -109,7 +113,6 @@ function handleGuess(correctSpot, userGuess) {
     } else {
         console.log('wrong');
     }
-
     // count your losses
     wrongGuesses = totalGuesses - correctGuesses;
     // output
@@ -136,19 +139,20 @@ function handleGuess(correctSpot, userGuess) {
     }
 }
 
+/*
+drop down menu for chilis option - DID NOT WORK :(
+const selectElem = document.getElementById('select');
+const pElem = document.getElementById('p');
 
-//code works for each container
-  //  shedContainer.classList.add('face');
-  //  treeContainer.classList.add('face');
- //   boulderContainer.classList.add('face');
-
-
-
-//var dummy = allContainer[correctSpot];
-    //dummy.classList.add('face');
-    //   resultsEl.textContent = `You guessed correctly ${correctGuesses} time(s) and incorrectly ${incorrectGuesses} time(s).`;
-
-    
-    // then if the user guess is correct, increment the correct guesses
-    
- //update the DOM to show this change to the user (including the losses, not tracked directly in state)
+selectElem.addEventListener('change', function() {
+    const index = selectElem.selectedIndex;
+    pElem.textContent = `selectedIndex: ${index}`;
+    console.log(pElem.textContent);
+    if (pElem.textContent === 'selectedIndex: 1') {
+        document.getElementById('boulder-container').src = './assets/newchili.PNG';
+        document.getElementById('tree-container').src = './assets/newchili.PNG';
+        document.getElementById('shed-container').src = './assets/newchili.PNG';
+    } 
+} 
+);
+*/
