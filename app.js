@@ -1,7 +1,11 @@
+/* eslint-disable no-console */
 // import functions and grab DOM elements
 const shedButton = document.getElementById('shed-button');
 const treeButton = document.getElementById('tree-button');
 const boulderButton = document.getElementById('boulder-button');
+const restartButton = document.getElementById('restart-button');
+const normalButton = document.getElementById('normal-button');
+const impossibleButton = document.getElementById('impossible-button');
 
 const shedContainer = document.getElementById('shed-container');
 const treeContainer = document.getElementById('tree-container');
@@ -18,23 +22,80 @@ const hidingPlaces = ['tree', 'shed', 'boulder'];
 let correctGuesses = 0;
 let totalGuesses = 0;
 let wrongGuesses = 0;
+let impossibleMode = 0;
 
 shedButton.addEventListener('click', () => {
     const hidingSpot = Math.floor(Math.random() * 3);
-    const answer = hidingPlaces[hidingSpot];
-    handleGuess(answer, 'shed');
+    let answer = hidingPlaces[hidingSpot];
+    console.log(answer);
+    if (impossibleMode === 0){
+        handleGuess(answer, 'shed');
+    } else {
+        if (answer === 'shed'){
+            let answer = 'boulder';
+        } else {
+            handleGuess(answer, 'shed'); 
+        }
+    }
 });
 
 treeButton.addEventListener('click', () => {
     const hidingSpot = Math.floor(Math.random() * 3);
-    const answer = hidingPlaces[hidingSpot];
-    handleGuess(answer, 'tree');
+    let answer = hidingPlaces[hidingSpot];
+    if (impossibleMode === 0){
+        handleGuess(answer, 'tree');
+    } else {
+        if (answer === 'tree'){
+            let answer = 'shed';
+        } else {
+            handleGuess(answer, 'tree'); 
+        }
+    }
 });
 
 boulderButton.addEventListener('click', () => {
     const hidingSpot = Math.floor(Math.random() * 3);
-    const answer = hidingPlaces[hidingSpot];
-    handleGuess(answer, 'boulder');
+    let answer = hidingPlaces[hidingSpot];
+    if (impossibleMode === 0){
+        handleGuess(answer, 'boulder');
+    } else {
+        if (answer === 'boulder'){
+            let answer = 'tree';
+        } else {
+            handleGuess(answer, 'boulder'); 
+        }
+    }
+});
+
+restartButton.addEventListener('click', () => {
+    console.log('look what you did');    
+    correctGuesses = 0;
+    winsEl.textContent = correctGuesses;
+    console.log(correctGuesses);
+    wrongGuesses = 0;
+    lossesEl.textContent = wrongGuesses;
+    console.log(wrongGuesses);
+    totalGuesses = 0;
+    console.log(totalGuesses);
+    totalEl.textContent = totalGuesses;
+    perCent.textContent = 0;
+    //restart styles
+    shedContainer.classList.remove('face');
+    treeContainer.classList.remove('face');
+    boulderContainer.classList.remove('face');
+    //restart styles
+    shedContainer.classList.remove('face');
+    treeContainer.classList.remove('face');
+    boulderContainer.classList.remove('face');    
+});
+
+impossibleButton.addEventListener('click', () => {
+    console.log('IMPOSSIBLE');    
+    impossibleMode = 1;
+});
+normalButton.addEventListener('click', () => {
+    console.log('KEEP VANCOUVER NORMAL');    
+    impossibleMode = 0;
 });
 
 function handleGuess(correctSpot, userGuess) {
@@ -74,6 +135,8 @@ function handleGuess(correctSpot, userGuess) {
         boulderContainer.classList.add('face');
     }
 }
+
+
 //code works for each container
   //  shedContainer.classList.add('face');
   //  treeContainer.classList.add('face');
